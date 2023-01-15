@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import Carusel from './components/Carusel/Carusel';
 import Footer from './components/Footer/Footer';
+import Information from './components/Information/Information';
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
 
         </Route>
         <Route path='/profile' element={<Profile></Profile>}>
+
+        </Route>
+        <Route path="/productInformation/:productId" element={<Information></Information>}>
 
         </Route>
         <Route path='*' element={<NotFound></NotFound>}>
