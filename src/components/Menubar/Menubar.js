@@ -14,7 +14,6 @@ const Menubar = () => {
                 <Container>
                     <Nav className="me-auto">
                         <Link to="/home">Home</Link>
-                        <Link to="/products">Products</Link>
                         <Link to="/orders">Orders</Link>
                         <Link to="/login">Login</Link>
                         <Link to="/profile">Profile</Link>
