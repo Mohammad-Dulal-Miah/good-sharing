@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import {  Link, Navigate, unstable_HistoryRouter, useNavigate} from 'react-router-dom';
 import GetProducts from '../../CustomHook/getProducts';
-import { deleteProductLocal, findObj } from '../../CustomHook/utilities';
+import { deleteProductLocal, findObj, findUser } from '../../CustomHook/utilities';
 import OrdersInfo from '../OrdersInfo/OrdersInfo';
 import './Orders.css';
 
@@ -38,7 +39,6 @@ const Orders = () => {
     }
 
 
-   
 
     return (
         <div className="container mt-5">
@@ -52,7 +52,7 @@ const Orders = () => {
         <div className='text-center'>
 
             {
-                selectProduct.length>0?  <button className='btn btn-warning'>Confirm Order</button>:<h2 className='text text-danger'>Added Product in Your Cart</h2>
+                selectProduct.length>0?  <button className='btn btn-warning'><Link to='/profile'>Confirm order</Link></button>:<h2 className='text text-danger'>Added Product in Your Cart</h2>
             }
           
         </div>

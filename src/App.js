@@ -50,9 +50,6 @@ function App() {
  
         <Route path='/login' element={<PrivateRouteLogin><Login></Login></PrivateRouteLogin>}/>
 
-       
-
-
         <Route path='/profile' element={<PrivateRoute><Profile/></PrivateRoute>}/>
 
 
