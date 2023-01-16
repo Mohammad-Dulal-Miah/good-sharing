@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  Link, Navigate, unstable_HistoryRouter, useNavigate} from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import GetProducts from '../../CustomHook/getProducts';
 import { deleteProductLocal, findObj, findUser } from '../../CustomHook/utilities';
 import OrdersInfo from '../OrdersInfo/OrdersInfo';
