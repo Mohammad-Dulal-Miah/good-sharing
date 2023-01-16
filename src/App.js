@@ -12,10 +12,14 @@ import Footer from './components/Footer/Footer';
 import Information from './components/Information/Information';
 import Registration from './components/Registration/Registration';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import { createContext } from 'react';
 
+const user = createContext();
 function App() {
+
+  const uid="";
   return (
-    <div>
+    <user.Provider value={uid}>
       <Menubar></Menubar>
       <Carusel></Carusel>
     
@@ -42,7 +46,7 @@ function App() {
 
         </Route>
         <Route path='/forgotPassword' element={<ForgotPassword></ForgotPassword>}>
-          
+
         </Route>
         <Route path='/profile' element={<Profile></Profile>}>
 
@@ -56,8 +60,11 @@ function App() {
 
       </Routes>
       <Footer></Footer>
-    </div>
+    </user.Provider>
   );
 }
 
 export default App;
+export {
+  user
+}

@@ -39,7 +39,25 @@ const findObj = () =>{
     }
 }
 
+const addUser = (id)=>{
 
+
+    const data  = findUser();
+    localStorage.setItem("list" , JSON.stringify(id));
+
+}
+
+
+const findUser = ()=>{
+
+    const user = localStorage.getItem("list");
+    if(user){
+        return JSON.parse(user)
+    }
+    else{
+        return {}
+    }
+}
 
 export {
     addToLocal
@@ -47,4 +65,8 @@ export {
     findObj
     ,
     deleteProductLocal
+    ,
+    addUser
+    ,
+    findUser
 }
