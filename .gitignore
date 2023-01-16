@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-Authentication
+.firebase.config.js
 /.pnp
 .pnp.js
 
