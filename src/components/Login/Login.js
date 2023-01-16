@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import registration from '../../images/registration.jpg'
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from '../../Authentication/firebase.confog';
-import { user } from '../../App';
-import { addUser } from '../../CustomHook/utilities';
+
+import { addUser} from '../../CustomHook/utilities';
 
 
 const auth = getAuth(app);
@@ -13,8 +13,9 @@ const auth = getAuth(app);
 const Login = () => {
 
     const[message , setMessage] = useState('');
-    let uid = useContext(user);
+    
     const navigate = useNavigate();
+   
 
     const loginUser = (event) => {
 
@@ -49,8 +50,8 @@ const Login = () => {
                             }
                             else{
                                 setMessage("Login success")
-                                uid = user.uid;
-                                addUser(uid);
+                               
+                                addUser(user.uid);
                                 navigate('/profile');
                                
                             }

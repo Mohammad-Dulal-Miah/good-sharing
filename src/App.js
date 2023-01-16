@@ -12,17 +12,18 @@ import Footer from './components/Footer/Footer';
 import Information from './components/Information/Information';
 import Registration from './components/Registration/Registration';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
-import { createContext } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import PrivateRouteLogin from './components/PrivateRouteLogin/PrivateRouteLogin';
 
-const user = createContext();
+
 function App() {
 
-  const uid="";
+
   return (
-    <user.Provider value={uid}>
+    <div>
       <Menubar></Menubar>
       <Carusel></Carusel>
-    
+
 
       <Routes>
 
@@ -39,18 +40,22 @@ function App() {
         <Route path='/orders' element={<Orders></Orders>}>
 
         </Route>
-        <Route path='/login' element={<Login></Login>}>
 
-        </Route>
         <Route path='registration' element={<Registration></Registration>}>
 
         </Route>
         <Route path='/forgotPassword' element={<ForgotPassword></ForgotPassword>}>
 
         </Route>
-        <Route path='/profile' element={<Profile></Profile>}>
+ 
+        <Route path='/login' element={<PrivateRouteLogin><Login></Login></PrivateRouteLogin>}/>
 
-        </Route>
+       
+
+
+        <Route path='/profile' element={<PrivateRoute><Profile/></PrivateRoute>}/>
+
+
         <Route path="/productInformation/:productId" element={<Information></Information>}>
 
         </Route>
@@ -60,11 +65,8 @@ function App() {
 
       </Routes>
       <Footer></Footer>
-    </user.Provider>
+    </div>
   );
 }
 
 export default App;
-export {
-  user
-}
