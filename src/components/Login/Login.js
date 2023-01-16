@@ -72,7 +72,7 @@ const Login = () => {
                                 <br />
                                 <input type="password" name="password" className="form-controll" placeholder='Password' required />
                                 <br />
-                                <input type="password" name="cpassword" className="form-controll" placeholder='conform password' required />
+                                <input type="password" name="cpassword" className="form-controll" placeholder='confirm password' required />
                                 <br />
                                 <input type="submit" value="Submit" className='btn btn-danger' />
                                 <br/>

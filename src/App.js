@@ -11,6 +11,7 @@ import Carusel from './components/Carusel/Carusel';
 import Footer from './components/Footer/Footer';
 import Information from './components/Information/Information';
 import Registration from './components/Registration/Registration';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
 
         </Route>
         <Route path='registration' element={<Registration></Registration>}>
+
+        </Route>
+        <Route path='/forgotPassword' element={<ForgotPassword></ForgotPassword>}>
           
         </Route>
         <Route path='/profile' element={<Profile></Profile>}>
