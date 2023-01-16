@@ -16,7 +16,7 @@ function App() {
     <div>
       <Menubar></Menubar>
       <Carusel></Carusel>
-      <Categories></Categories>
+    
 
       <Routes>
 
@@ -24,6 +24,10 @@ function App() {
 
         </Route>
         <Route path='/home' element={<Products></Products>}>
+
+        </Route>
+
+        <Route path='/categories' element={<Categories></Categories>}>
 
         </Route>
         <Route path='/orders' element={<Orders></Orders>}>

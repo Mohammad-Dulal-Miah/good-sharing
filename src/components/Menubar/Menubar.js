@@ -7,13 +7,14 @@ import './Menubar.css';
 
 const Menubar = () => {
     return (
-        <div>
-            <div className='navbar-container container position'>
+        <div className='position'>
+            <div className='navbar-container container'>
             <h2><span style={{ color: "tomato" }}>Pase</span></h2>
             <Navbar>
                 <Container>
                     <Nav className="me-auto">
                         <Link to="/home">Home</Link>
+                        <Link to="/categories">Categories</Link>
                         <Link to="/orders">Orders</Link>
                         <Link to="/login">Login</Link>
                         <Link to="/profile">Profile</Link>
