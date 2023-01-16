@@ -25,7 +25,7 @@ const Login = () => {
                             </form>
                             <span>Forgot password ? <Link to="/forgotPassword">click here</Link></span>
                             <br/>
-                            <span> Have you not account ? <Link to="registration">Registration</Link></span>
+                            <span> Have you not account ? <Link to="/registration">Registration</Link></span>
                         </div>
                     </div>
                 </div>

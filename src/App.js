@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile';
 import Carusel from './components/Carusel/Carusel';
 import Footer from './components/Footer/Footer';
 import Information from './components/Information/Information';
+import Registration from './components/Registration/Registration';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path='/login' element={<Login></Login>}>
 
+        </Route>
+        <Route path='registration' element={<Registration></Registration>}>
+          
         </Route>
         <Route path='/profile' element={<Profile></Profile>}>
 
