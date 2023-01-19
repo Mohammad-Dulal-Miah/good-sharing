@@ -5,17 +5,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from '../../Authentication/firebase.confog';
 
-import { addUser} from '../../CustomHook/utilities';
+import { addUser } from '../../CustomHook/utilities';
 
 
 const auth = getAuth(app);
 
 const Login = () => {
 
-    const[message , setMessage] = useState('');
-    
+    const [message, setMessage] = useState('');
+    const [valid , setValid] = useState(false);
+
     const navigate = useNavigate();
-   
+
 
     const loginUser = (event) => {
 
@@ -45,23 +46,38 @@ const Login = () => {
                     signInWithEmailAndPassword(auth, email, password)
                         .then((userCredential) => {
                             const user = userCredential.user;
-                            if(!user.emailVerified){
+                            if (!user.emailVerified) {
                                 setMessage("Your email is not verified...")
                             }
-                            else{
-                                setMessage("Login success")
+                            else {
+
+                                fetch(`http://localhost:4000/finduser/${user.uid}`)
+                                .then(res => res.json())
+                                .then(data => setValid(data))
+
+
+
+                                if(valid){
+
+                                    setMessage("Login success")
+
+                                    addUser(user.uid);
+                                    navigate('/profile');
+                                }
+                                else{
+                                    setMessage("Please wait. Admin will verify your account.")
+                                }
+
                                
-                                addUser(user.uid);
-                                navigate('/profile');
-                               
+
                             }
-                          
+
                         })
                         .catch((error) => {
-                           
+
                             const errorMessage = error.message;
                             setMessage(errorMessage)
-                           
+
                         });
                 }
             }
@@ -86,7 +102,7 @@ const Login = () => {
                                 <input type="password" name="cpassword" className="form-controll" placeholder='confirm password' required />
                                 <br />
                                 <input type="submit" value="Submit" className='btn btn-danger' />
-                                <br/>
+                                <br />
                                 <h4>{message}</h4>
                             </form>
                             <span>Forgot password ? <Link to="/forgotPassword">click here</Link></span>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { addToLocal } from '../../CustomHook/utilities';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { addToLocal, findObj, findUser } from '../../CustomHook/utilities';
 import './ProductInformation.css';
 
 
@@ -8,12 +9,20 @@ const ProductInformation = ({ product}) => {
     const { id, name, rentPrice, price, img, stock, rating } = product;
 
     const[add , setAdd] = useState(false);
+    const [valid , setValid] = useState(false);
 
-    const list = [];
+    const infoUser = findUser();
 
-    for (var i = 1; i <= rating; i++) {
-        list.push(i);
-    }
+    useEffect(()=>{
+
+        fetch(`http://localhost:4000/cartInfo/${infoUser}`)
+        .then(res => res.json())
+        .then(data => setValid(data))
+        .catch(err => setValid(false))
+
+       
+
+    },[])
 
     
     const addToProduct = (event) => {
@@ -39,6 +48,9 @@ const ProductInformation = ({ product}) => {
            }
        }
     }
+
+    const data = findObj();
+
 
 
 
@@ -72,9 +84,13 @@ const ProductInformation = ({ product}) => {
                     <input type="checkbox" id="second" name="second"/>
                         <label for="second">2</label>
                 </div>
-                <input type="submit" value="Add to Cart" className='btn btn-danger'/>
                 {
-                    add &&<p className='text text-success'>Thanks for add to cart...</p>
+                   ((Object.keys(data).length === 0)&&(valid===false))?<input type="submit" value="Add to Cart" className='btn btn-danger'/>:<p>You already added product or you get product</p>
+                }
+                {
+                    add &&<div><p className='text text-success'>Thanks for add to cart...</p><button className='btn btn success'><Link to='/orders'>Go Order</Link></button></div>
+                }{
+                    console.log(valid)
                 }
             </form>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import person from '../../images/person.jpg';
-import { findObj, findUser } from '../../CustomHook/utilities';
+import { deleteProductLocal, findObj, findUser } from '../../CustomHook/utilities';
 import GetUser from '../../CustomHook/getUser';
 import GetProducts from '../../CustomHook/getProducts';
 
@@ -9,6 +9,7 @@ const Profile = () => {
 
 
     const user1 = findUser();
+    const [valid , setValid] = useState(false);
 
     const personInfo = GetUser(user1);
 
@@ -36,7 +37,40 @@ const Profile = () => {
 
 
    const total = selectProduct.reduce((initial , product) => product.rentPrice*product.quantity+initial , 0);
-  
+
+   const confirmOrder = ()=>{
+
+            const productList = [];
+
+            selectProduct.map(product => productList.push(product.id))
+            productList.push(personInfo.id)
+
+            
+            fetch('http://localhost:4000/cart', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(productList),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+
+                    setValid(data)
+                })
+                .catch((error) => {
+                  console.error(error);
+
+                  setValid(false)
+                });
+   }
+
+   if(valid){
+
+    deleteProductLocal(selectProduct[0].id)
+   }
+
+
 
     return (
         <div className="container">
@@ -51,8 +85,9 @@ const Profile = () => {
                     <p>Email:{personInfo.email}</p>
                 </div>
                 <div className='col-md-4 col-sm-4 cart mt-5'>
-                    <h3>Total price: {total}</h3>
-                    <button className='btn btn-danger'>Confirm</button>
+                   {
+                    selectProduct.length>0? <div><h3>Total price: {total}</h3><button className='btn btn-danger' onClick={confirmOrder}>Confirm</button></div>:<p></p>
+                   }
                 </div>
             </div>
         </div>
