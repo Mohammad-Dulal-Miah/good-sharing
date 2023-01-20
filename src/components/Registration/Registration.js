@@ -39,11 +39,10 @@ const Registration = () => {
                 if (city.toLowerCase() === "gazipur") {
 
                     setMessage("Loading.....");
+
+                    //firebase user create
                     createUserWithEmailAndPassword(auth, email, password)
                         .then((userCredential) => {
-
-
-
 
                             const id = userCredential.user.uid;
                             form.reset();
@@ -51,7 +50,7 @@ const Registration = () => {
                             const newUser = { id, name, city, address, word, email, password, number };
                             verifyEmail();
 
-
+                            //new user information will go newUser api for saved in database
                             fetch('http://localhost:4000/newUser', {
                                 method: 'POST', // or 'PUT'
                                 headers: {
@@ -72,7 +71,7 @@ const Registration = () => {
                         });
                 }
                 else {
-                    alert("Invalid city.Only Gazipur...")
+                    alert("Invalid city...Only Gazipur...")
                 }
             }
         }
@@ -87,15 +86,18 @@ const Registration = () => {
         sendEmailVerification(auth.currentUser)
             .then(() => {
                 // Email verification sent!
-                // ...
+                // if he/his not check --> not login
             });
     }
+
+
+
     return (
         <div className="container">
             <section className='form text-center login-container m-5 p-5'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-md-4'>
+                        <div className='col-md-6'>
                             <img src={login} className="img-fluid mx-auto " alt="" />
                         </div>
                         <div className='col-md-6'>

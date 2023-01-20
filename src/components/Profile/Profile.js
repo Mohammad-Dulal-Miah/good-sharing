@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import person from '../../images/person.jpg';
-import { deleteProductLocal, findObj, findUser } from '../../CustomHook/utilities';
+import { deleteProductLocal, deleteUser, findObj, findUser } from '../../CustomHook/utilities';
 import GetUser from '../../CustomHook/getUser';
 import GetProducts from '../../CustomHook/getProducts';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Profile = () => {
 
@@ -15,6 +18,8 @@ const Profile = () => {
 
     const [selectProduct, setSelectProduct] = useState([])
     const products = GetProducts();
+
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -70,6 +75,20 @@ const Profile = () => {
     deleteProductLocal(selectProduct[0].id)
    }
 
+   const logout = ()=>{
+
+    deleteUser(user1);
+    navigate('/login')
+
+    // signOut(auth).then(() => {
+    //     // Sign-out successful.
+    //   }).catch((error) => {
+    //     // An error happened.
+    //   });
+
+   
+   }
+
 
 
     return (
@@ -83,6 +102,7 @@ const Profile = () => {
                     <h4>{personInfo.city}</h4>
                     <p><small>Word no: {personInfo.word}</small></p>
                     <p>Email:{personInfo.email}</p>
+                    <button onClick={()=>logout()} className='btn btn-danger'>Logout</button>
                 </div>
                 <div className='col-md-4 col-sm-4 cart mt-5'>
                    {

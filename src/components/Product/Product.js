@@ -4,12 +4,13 @@ import './Product.css';
 
 const Product = ({ product }) => {
 
-
+    //here destruct the product
     const { name, rentPrice, price, img, seller } = product;
 
     //react-router hook
     const navigate = useNavigate();
 
+    //single product navigate information component for extra information
     const productInfo = (product) => {
 
         const path = `/productInformation/${product.id}`;

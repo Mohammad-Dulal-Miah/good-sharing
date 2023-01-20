@@ -51,6 +51,7 @@ const Login = () => {
                             }
                             else {
 
+                                //check here user is valid or not form database from valid user
                                 fetch(`http://localhost:4000/finduser/${user.uid}`)
                                 .then(res => res.json())
                                 .then(data => setValid(data))
@@ -89,12 +90,12 @@ const Login = () => {
             <section className='form text-center login-container m-5 p-5'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-md-4'>
+                        <div className='col-md-6'>
                             <img src={registration} className="img-fluid" alt="" />
                         </div>
                         <div className='col-md-6'>
                             <h1>Login</h1>
-                            <form className='login' onSubmit={loginUser}>
+                            <form className='login ' onSubmit={loginUser}>
                                 <input type="email" name="email" className="form-controll" placeholder='Email' required />
                                 <br />
                                 <input type="password" name="password" className="form-controll" placeholder='Password' required />

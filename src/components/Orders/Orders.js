@@ -7,10 +7,13 @@ import './Orders.css';
 
 const Orders = () => {
 
-    const[selectProduct , setSelectProduct] = useState([])
+    const[selectProduct , setSelectProduct] = useState([]);
+
+    //system all products get here
     const products = GetProducts();
   
 
+    //here all the product find which is order
     useEffect(()=>{
         const storedCart = findObj();
         const cart = [];
@@ -29,7 +32,8 @@ const Orders = () => {
         setSelectProduct(cart);
     },[products])
 
-       
+     
+    //delete form state and also localStorage
     const deleteProduct = (id) =>{
        
         deleteProductLocal(id);

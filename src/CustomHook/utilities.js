@@ -48,6 +48,20 @@ const addUser = (id)=>{
 }
 
 
+const deleteUser = (id)=>{
+
+    const data = findUser();
+   
+
+    if(data){
+       localStorage.removeItem('list')
+    
+    }
+   
+  
+}
+
+
 const findUser = ()=>{
 
     const user = localStorage.getItem("list");
@@ -69,4 +83,6 @@ export {
     addUser
     ,
     findUser
+    ,
+    deleteUser
 }

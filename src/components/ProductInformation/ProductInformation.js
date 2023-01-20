@@ -5,51 +5,59 @@ import './ProductInformation.css';
 
 
 
-const ProductInformation = ({ product}) => {
+const ProductInformation = ({ product }) => {
+
     const { id, name, rentPrice, price, img, stock, rating } = product;
 
-    const[add , setAdd] = useState(false);
-    const [valid , setValid] = useState(false);
+    const [add, setAdd] = useState(false);
+    const [valid, setValid] = useState(false);
 
+    //this findObj --> how many product add in cart
+    const data = findObj();
+
+    //get user id form utilities function
     const infoUser = findUser();
 
-    useEffect(()=>{
+    /*
+       call this api for user have product or not
+       Yes --> valid true 
+       No --> valid false
+
+       true --> user can not add product in his/her cart
+    */
+    useEffect(() => {
 
         fetch(`http://localhost:4000/cartInfo/${infoUser}`)
-        .then(res => res.json())
-        .then(data => setValid(data))
-        .catch(err => setValid(false))
+            .then(res => res.json())
+            .then(data => setValid(data))
+            .catch(err => setValid(false))
 
-       
+    }, [])
 
-    },[])
 
-    
     const addToProduct = (event) => {
         event.preventDefault();
 
         const value1 = event.target.first.checked;
         const value2 = event.target.second.checked;
 
-       if(value1 && value2){
-        alert("Please chose only one plan...");
-       }
-       else if(!value1 && !value2){
-        alert("please chose plan..")
-       }
-       else{
-           if(value1){
+        if (value1 && value2) {
+            alert("Please chose only one plan...");
+        }
+        else if (!value1 && !value2) {
+            alert("please chose plan..")
+        }
+        else {
+            if (value1) {
                 addToLocal(id);
                 setAdd(true);
-           }
-           else{
+            }
+            else {
                 addToLocal(id);
                 setAdd(true);
-           }
-       }
+            }
+        }
     }
-
-    const data = findObj();
 
 
 
@@ -76,21 +84,20 @@ const ProductInformation = ({ product}) => {
                 <h4>Choose your plan:</h4>
 
                 <div>
-                    <input type="checkbox" id="first" name="first"/>
-                        <label for="first">1</label>
+                    <input type="checkbox" id="first" name="first" />
+                    <label for="first">1</label>
                 </div>
 
                 <div>
-                    <input type="checkbox" id="second" name="second"/>
-                        <label for="second">2</label>
+                    <input type="checkbox" id="second" name="second" />
+                    <label for="second">2</label>
                 </div>
                 {
-                   ((Object.keys(data).length === 0)&&(valid===false))?<input type="submit" value="Add to Cart" className='btn btn-danger'/>:<p>You already added product or you get product</p>
+                    ((Object.keys(data).length === 0) && (valid === false)) ? <input type="submit" value="Add to Cart" className='btn btn-danger' /> : <p>You already added product or you get product</p>
                 }
+                {/* Here work add hook */}
                 {
-                    add &&<div><p className='text text-success'>Thanks for add to cart...</p><button className='btn btn success'><Link to='/orders'>Go Order</Link></button></div>
-                }{
-                    console.log(valid)
+                    add && <div><p className='text text-success'>Thanks for add to cart...</p><button className='btn btn success'><Link to='/orders'>Go Order</Link></button></div>
                 }
             </form>
 
